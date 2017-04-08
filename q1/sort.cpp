@@ -1,15 +1,15 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-template <typename T, typename Container=vector<T>>
-bool test_sort(Container& array) {
+template <typename T, typename Container=vector<T> >
+bool test_sort(const Container& array) {
     for(int i = 1;i < (int)array.size();i++)
         if(array[i] < array[i - 1])
             return false;
     return true;
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 int merge(Container& array, int lo, int mid, int hi) {
     vector<T> temp;
     int i = lo, j = mid + 1, comparisons = 0;
@@ -34,7 +34,7 @@ int merge(Container& array, int lo, int mid, int hi) {
     return comparisons;
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 pair<int,int> partition(Container& array, int pivot, int lo, int hi) {
     T value = array[pivot];
     swap(array[pivot], array[hi]);
@@ -49,7 +49,7 @@ pair<int,int> partition(Container& array, int pivot, int lo, int hi) {
     return {store, comparisons};
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 int merge_sort(Container& array, int lo, int hi) {
     int total_comparisons = 0;
     if(lo < hi) {
@@ -61,7 +61,7 @@ int merge_sort(Container& array, int lo, int hi) {
     return total_comparisons;
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 int quick_sort_random(Container& array, int lo, int hi) {
     int total_comparisons = 0;
     if(lo < hi) {
@@ -76,7 +76,7 @@ int quick_sort_random(Container& array, int lo, int hi) {
     return total_comparisons;
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 int quick_sort(Container& array, int lo, int hi) {
     int total_comparisons = 0;
     if(lo < hi) {
@@ -97,28 +97,41 @@ int quick_sort(Container& array, int lo, int hi) {
     return total_comparisons;
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 int merge_sort_algo(Container& array) {
     return merge_sort<T>(array, 0, (int)array.size() - 1);
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 int quick_sort_random_algo(Container& array) {
     return quick_sort_random<T>(array, 0, (int)array.size() - 1);
 }
 
-template <typename T, typename Container=vector<T>>
+template <typename T, typename Container=vector<T> >
 int quick_sort_algo(Container& array) {
     return quick_sort<T>(array, 0, (int)array.size() - 1);
 }
 
 int main() {
-    vector<int> v = {'z', 'r', 't', 'y', 'q', 'i', 'p', 'f', 's', 'd'};
-    int total = merge_sort_algo<int>(v);
-    printf("%d\n", total);
-    cout<<test_sort<int>(v)<<endl;
-    for(auto &it: v)
-        cout<<it<<" ";
-    cout<<endl;
+    freopen("filetoopen.txt", "r", stdin);
+    string s;
+    cin>>s;
+    freopen(s.c_str(), "r", stdin);
+    vector<int> a, b, c;
+    int n;
+    scanf("%d",&n);
+    for(int i = 0;i < n;i++) {
+        int tmp;
+        scanf("%d",&tmp);
+        a.emplace_back(tmp);
+        b.emplace_back(tmp);
+        c.emplace_back(tmp);
+    }
+    int ans1, ans2, ans3;
+    ans1 = merge_sort_algo<int>(a);
+    ans2 = quick_sort_algo<int>(b);
+    ans3 = quick_sort_random_algo<int>(c);
+    if(test_sort<int>(a) and test_sort<int>(b) and test_sort<int>(c))
+        printf("%d %d %d %d\n", n, ans1, ans2, ans3);
     return 0;
 }
