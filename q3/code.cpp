@@ -60,20 +60,58 @@ void part1() {
     vector<int> a;
     generate_random_array(a);
     int n = (int)(a.size());
-    ll ans = 0;
     double nlgn = n*log2(n);
     for(int i = 1;i <= 100000;i++) {
         shuffle_array(a);
         if(i%50 != 0)
             continue;
         ll b = quick_sort_random_algo(a);
-        ans += b;
-        double k = (1.0*ans)/(1.0*i);
         printf("%d %lld %lf\n", i, b, nlgn);
     }
 }
 
+void generate_random_array1(vector<int>& a, int n=1000) {
+    a.clear();
+    while(n--) {
+        srand(time(NULL));
+        a.emplace_back(rand()%10000);
+    }
+    for(int i = 100;i >= 0;i--)
+        shuffle_array(a);
+}
+
+void part2() {
+    freopen("output2.txt", "w", stdout);
+    int n = 1000;
+    double nlgn = n*log2(n);
+    for(int i = 1;i <= 2000;i++) {
+        vector<int> a;
+        generate_random_array(a);
+        ll b = quick_sort_random_algo(a);
+        printf("%d %lld %lf\n", i, b, nlgn);
+    }
+}
+
+void part3() {
+    freopen("output3.txt", "w", stdout);
+    vector<int> a;
+    int k = 100;
+    for(int i = 1;i <= 5000;i++) {
+        if(i%20 == 1)
+            generate_random_array(a, k);
+        shuffle_array(a);
+        if(i%20 != 0)
+            continue;
+        ll b = quick_sort_random_algo(a);
+        double nlgn = k*log2(k);
+        printf("%d %lld %lf\n", k, b, nlgn);
+        k += 100;
+    }
+}
+
 int main() {
-    part1();
+    //part1();
+    //part2();
+    part3();
     return 0;
 }
