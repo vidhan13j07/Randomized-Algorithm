@@ -1,0 +1,19 @@
+#!/usr/bin/gnuplot
+# The above line is required. Dont remove it unless you know what you are doing
+
+set term post eps font 'Helvatica,15'
+set ylabel 'Number of comparisons'
+set xlabel 'Input size(n)'
+#set logscale y   # As you can guess.. # begins a comment
+set autoscale y
+#set xrange [0:1100000]
+#set yrange [0:14000000]
+set style data linespoints 
+set output 'graph.eps'           # The output file is produced as rtt.eps You should have appropriate application to open .eps files
+
+# Invest some time in understanding how is it plotting the curves. You will have to look at the files too. 
+plot  "output.txt" using 1:2 title 'MS', "output.txt" using 1:3 title 'RQS', "output.txt" using 1:4 title 'QS' smooth bezier
+
+
+# If you are interested in learning how to write gnuplot scripts and want your plots to look more fancy. Learnt it! It is a really easy, amazing and powerful tool to plot.
+ᐧ
