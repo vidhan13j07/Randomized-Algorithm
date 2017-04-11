@@ -90,11 +90,28 @@ void part2() {
         ll b = quick_sort_random_algo(a);
         printf("%d %lld %lf\n", i, b, nlgn);
     }
+}
 
+void part3() {
+    freopen("output3.txt", "w", stdout);
+    vector<int> a;
+    int k = 100;
+    for(int i = 1;i <= 5000;i++) {
+        if(i%20 == 1)
+            generate_random_array(a, k);
+        shuffle_array(a);
+        if(i%20 != 0)
+            continue;
+        ll b = quick_sort_random_algo(a);
+        double nlgn = k*log2(k);
+        printf("%d %lld %lf\n", k, b, nlgn);
+        k += 100;
+    }
 }
 
 int main() {
     //part1();
     //part2();
+    part3();
     return 0;
 }
